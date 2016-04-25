@@ -1,0 +1,27 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using HoboAnimal.Domain.Abstract;
+using HoboAnimal.Domain.Entities;
+
+namespace HoboAnimal.WebUI.Controllers
+{
+        /*In this class realized repo logic that create instance of interface
+         and create constructor for realized DI*/
+    public class ProfileController : Controller
+    {
+        private IProfileRepository repository;
+        public ProfileController(IProfileRepository productRepository)
+        {
+            this.repository = productRepository;
+        }
+
+        public ActionResult List()
+        {
+            return View(repository.Profiles);
+        }
+
+    }
+}
