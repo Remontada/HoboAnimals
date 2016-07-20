@@ -18,9 +18,18 @@ namespace HoboAnimal.WebUI.Controllers
             this.repository = productRepository;
         }
 
-        public ActionResult List()
+        
         {
-            return View(repository.Profiles);
+             public ViewResult List(int? page, string category)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 2;
+            ProfilesListViewModel model = new ProfilesListViewModel{
+                Profiles = repository.Profiles.OrderBy(s => s.ProfileID).ToPagedList(pageNumber, pageSize),
+            };
+           
+                return View(model);
+               
         }
 
     }
